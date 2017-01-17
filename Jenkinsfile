@@ -12,7 +12,7 @@ stage('Static Code Analysis') {
 
 stage('Unit Tests') {
   node {
-  sh "pybot tests/acceptance"
+  sh "pybot tests/"
   step([$class: 'RobotPublisher',
   disableArchiveOutput: false,
   logFileName: 'log.html',
