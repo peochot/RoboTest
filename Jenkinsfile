@@ -12,16 +12,8 @@ stage('Static Code Analysis') {
 
 stage('Unit Tests') {
   node {
-  sh "pybot tests/"
-  step([$class: 'RobotPublisher',
-  disableArchiveOutput: false,
-  logFileName: 'log.html',
-  otherFiles: '',
-  outputFileName: 'output.xml',
-  outputPath: '.',
-  passThreshold: 100,
-  reportFileName: 'report.html',
-  unstableThreshold: 0]);
+    println env.BRANCH_NAME
+
   }
 }
 
