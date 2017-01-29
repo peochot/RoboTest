@@ -1,4 +1,9 @@
-def branch = env.BRANCH_NAME
+@NonCPS
+def branch(pattern, body) {
+    def matcher = (env.BRANCH_NAME =~ pattern)
+    assert matcher.matches()
+    body()
+}
 
 stage('Build') {
   node {
@@ -20,9 +25,9 @@ stage('Acceptance Tests') {
     sh "echo $BRANCH_NAME"
   }
 }
-
-stage('Nofification') {
-  node {
-    sh "echo 'Send Notifications'"
-  }
-}
+brach(/master/, ->
+  stage('Nofification') {
+    node {
+      sh "echo 'Send Notifications'"
+    }
+})
