@@ -1,18 +1,15 @@
+def branch = env.BRANCH_NAME
+
 stage('Build') {
   node {
     checkout scm
   }
 }
 
-stage('Static Code Analysis') {
-  node {
-    sh "echo 'Run Static Code Analysis'"
-  }
-}
 
 stage('Unit Tests') {
   node {
-    println env.BRANCH_NAME
+    println "cac " + branch
 
   }
 }
@@ -20,6 +17,7 @@ stage('Unit Tests') {
 stage('Acceptance Tests') {
   node {
     sh "echo 'Run Acceptance Tests'"
+    sh 'echo $BRANCH_NAME'
   }
 }
 
