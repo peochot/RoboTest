@@ -17,7 +17,7 @@ stage('Unit Tests') {
 stage('Acceptance Tests') {
   node {
     sh "echo 'Run Acceptance Tests'"
-    sh 'echo $BRANCH_NAME'
+    sh "echo $BRANCH_NAME"
   }
 }
 
