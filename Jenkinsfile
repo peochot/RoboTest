@@ -19,6 +19,7 @@ stage('Unit Tests') {
   }
 }
 branch(/master/,{
+
   stage('Acceptance Tests') {
     node {
       println "Acceptance Test "
