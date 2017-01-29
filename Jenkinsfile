@@ -1,30 +1,27 @@
+
+@NonCPS
+def branch(pattern, body) {
+    def matcher = (env.BRANCH_NAME =~ pattern)
+    if(matcher.matches())
+    body()
+}
+
 stage('Build') {
   node {
     checkout scm
   }
 }
 
-stage('Static Code Analysis') {
-  node {
-    sh "echo 'Run Static Code Analysis'"
-  }
-}
 
 stage('Unit Tests') {
   node {
-    println env.BRANCH_NAME
-
+    println "Unit Test "
   }
 }
-
-stage('Acceptance Tests') {
-  node {
-    sh "echo 'Run Acceptance Tests'"
+branch(/testtest/,{
+  stage('Acceptance Tests') {
+    node {
+      println "Acceptance Test "
+    }
   }
-}
-
-stage('Nofification') {
-  node {
-    sh "echo 'Send Notifications'"
-  }
-}
+})
