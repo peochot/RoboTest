@@ -1,7 +1,8 @@
+
 @NonCPS
 def branch(pattern, body) {
     def matcher = (env.BRANCH_NAME =~ pattern)
-    assert matcher.matches()
+    if(matcher.matches())
     body()
 }
 
@@ -14,20 +15,13 @@ stage('Build') {
 
 stage('Unit Tests') {
   node {
-    println "cac " + branch
-
+    println "Unit Test "
   }
 }
-
-stage('Acceptance Tests') {
-  node {
-    sh "echo 'Run Acceptance Tests'"
-    sh "echo $BRANCH_NAME"
-  }
-}
-brach(/master/, ->
-  stage('Nofification') {
+branch(/testtest/,{
+  stage('Acceptance Tests') {
     node {
-      sh "echo 'Send Notifications'"
+      println "Acceptance Test "
     }
+  }
 })
