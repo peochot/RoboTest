@@ -18,10 +18,10 @@ stage('Unit Tests') {
     println "Unit Test "
   }
 }
-branch(/testtest/,{
+branch(/testtest/,
   stage('Acceptance Tests') {
     node {
       println "Acceptance Test "
     }
   }
-})
+)
