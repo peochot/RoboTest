@@ -15,7 +15,7 @@ stage('Build') {
 
 stage('Unit Tests') {
   node {
-    sh 'echo BRANCH_NAME'
+    println "branch "+ env.BRANCH_NAME
     println "Unit Test "
   }
 }
