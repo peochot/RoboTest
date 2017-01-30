@@ -19,7 +19,7 @@ stage('Unit Tests') {
     println "Unit Test "
   }
 }
-branch(/master/,{
+branch(/^master$/,{
   stage('Acceptance Tests') {
     node {
       println "Acceptance Test "
