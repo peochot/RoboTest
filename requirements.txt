@@ -1,0 +1,7 @@
+wheel
+future
+robotframework
+http://github.com/HelioGuilherme66/robotframework-selenium2library/archive/v1.8.0b1.zip
+robotframework-xvfb
+flask
+flask_cors

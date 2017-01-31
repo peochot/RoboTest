@@ -1,0 +1,18 @@
+FROM elbaschid/python:3.5
+MAINTAINER phan.nguyen.huy@zalando.fi
+
+COPY ./requirements.txt /home/requirements.txt
+
+RUN apk update -q && apk add --no-cache xvfb firefox dbus nodejs curl
+RUN xargs -n 1 pip3 install < ./home/requirements.txt  \
+    && cd /home/ \
+    && wget http://github.com/mozilla/geckodriver/releases/download/v0.13.0/geckodriver-v0.13.0-linux64.tar.gz \
+    && tar -xvzf geckodriver-v0.13.0-linux64.tar.gz \
+    && chmod +x geckodriver \
+    && cp ./geckodriver /usr/local/bin/geckodriver \
+    && mkdir /home/project
+
+ENV LANG=en_US.UTF-8
+
+
+ENTRYPOINT ["/bin/bash","/home/project/test.sh"]
