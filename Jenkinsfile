@@ -1,4 +1,4 @@
-properties([parameters([booleanParam(defaultValue: true, description: '', name: 'running')]), [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'category'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
+properties([concurrentBuilds(false)])
 
 stage('Build') {
   node {
