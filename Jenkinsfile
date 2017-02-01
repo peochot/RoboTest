@@ -1,3 +1,4 @@
+properties([disableConcurrentBuilds(), [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
 
 stage('Build') {
   properties([disableConcurrentBuilds()])
