@@ -1,6 +1,6 @@
 
 stage('Build') {
-  disableConcurrentBuilds()
+  properties([disableConcurrentBuilds()])
   node {
     checkout scm
     println env.BRANCH_NAME
