@@ -1,4 +1,4 @@
-properties([[$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: true, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '1', throttleEnabled: true, throttleOption: 'category'], [$class: 'JobPropertyImpl', throttle: [count: 1, durationName: 'hour']], pipelineTriggers([])])
+properties([[$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'category'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1d']])])
 
 stage('Build') {
   node {
