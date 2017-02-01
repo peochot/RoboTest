@@ -1,5 +1,6 @@
-properties([disableConcurrentBuilds(true)])
-
+options {
+    disableConcurrentBuilds()
+}
 stage('Build') {
   node {
     checkout scm
