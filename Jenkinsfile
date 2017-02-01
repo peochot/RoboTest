@@ -1,4 +1,4 @@
-properties([concurrentBuilds(false)])
+properties([disableConcurrentBuilds(true)])
 
 stage('Build') {
   node {
