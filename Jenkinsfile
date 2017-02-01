@@ -1,7 +1,8 @@
-options {
-    disableConcurrentBuilds()
-}
+
 stage('Build') {
+  options {
+      disableConcurrentBuilds()
+  }
   node {
     checkout scm
   }
