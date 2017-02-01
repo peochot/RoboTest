@@ -1,3 +1,5 @@
+properties([[$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '1', throttleEnabled: true, throttleOption: 'project'], pipelineTriggers([])])
+
 stage('Build') {
   node {
     checkout scm
@@ -5,6 +7,7 @@ stage('Build') {
 }
 
 stage('Static Code Analysis') {
+
   node {
     sh "echo 'Run Static Code Analysis'"
   }
