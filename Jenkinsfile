@@ -1,6 +1,6 @@
 
 stage('Build') {
-  properties([disableConcurrentBuilds(),DisableConcurrentBuildsJobProperty(), overrideIndexTriggers(false), [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
+  properties([disableConcurrentBuilds(), overrideIndexTriggers(false), [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
   node {
   lock(resource: "lock_${env.NODE_NAME}_${env.BRANCH_NAME}", inversePrecedence: true) {
     checkout scm
