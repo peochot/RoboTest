@@ -1,7 +1,6 @@
-properties([disableConcurrentBuilds(), [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
 
 stage('Build') {
-  properties([disableConcurrentBuilds()])
+  properties([disableConcurrentBuilds(), parameters([[$class: 'CredentialsParameterDefinition', credentialType: 'com.cloudbees.plugins.credentials.common.StandardCredentials', defaultValue: '64f9f9ba-7843-4a71-a4ee-6e357d2bd5a7', description: '', name: 'credential', required: false]]), [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: true, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: 'credential', throttleEnabled: true, throttleOption: 'category'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
   node {
     checkout scm
     println env.BRANCH_NAME
