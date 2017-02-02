@@ -2,6 +2,7 @@
 stage('Build') {
   properties([disableConcurrentBuilds(),DisableConcurrentBuildsJobProperty(), overrideIndexTriggers(false), [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 1, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
   node {
+  lock(resource: "lock_${env.NODE_NAME}_${env.BRANCH_NAME}", inversePrecedence: true) {
     checkout scm
     println env.BRANCH_NAME
     timeout(240) {
@@ -14,5 +15,7 @@ stage('Build') {
           return (executor == 2);
       }
     }
+  }
+
   }
 }
