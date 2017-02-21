@@ -3,9 +3,9 @@
       stage("Build") {
           echo "Building"
           try {
-            notifyHipchat("GREEN")
+            notifyHipchat("GREEN", currentBuild)
           } catch(e) {
-            notifyHipchat("RED")
+            notifyHipchat("RED", currentBuild)
             throw e;
           }
       }
@@ -27,8 +27,8 @@
   }
 }
 
-def notifyHipchat(c) {
-  hipchatSend (color: c, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) ")
+def notifyHipchat(c, build) {
+  hipchatSend (color: c, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})  ${summarizeBuild(build)}")
 }
 
 def notifySuccessful() {
