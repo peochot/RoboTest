@@ -5,12 +5,27 @@
           def build = currentBuild
           currentBuild.result = "STARTED"
           def color = "GREEN"
-          notify(build, color)
+          notify(color)
       }
+
+      stage("Unit Test") {
+          echo "Unit testing"
+      }
+
+      branch(/^master$/){
+          stage("Pushing to stage") {
+              echo "Push"
+          }
+          stage("Trigger stage job") {
+              echo "Deploying"
+          }
+      }
+
+
   }
 }
 
-def notify(def build,def color) {
+def notify(def color) {
   hipchatSend (color: color, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
