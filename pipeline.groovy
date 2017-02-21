@@ -8,6 +8,7 @@
             notifyStarted(summarizeBuild(build))
           } catch(e) {
             notifyFailed()
+            throw e;
           }
       }
       stage("Unit Test") {
