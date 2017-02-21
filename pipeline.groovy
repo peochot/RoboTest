@@ -6,10 +6,10 @@
             def build = currentBuild
             currentBuild.result = "STARTED"
             def color = "GREEN"
-            notify()
+            notifyHipchat()
           } catch(e) {
             currentBuild.result = "FAILED"
-            notify()
+            notifyHipchat()
             throw e;
           }
       }
@@ -31,7 +31,7 @@
   }
 }
 
-def notify() {
+def notifyHipchat() {
   hipchatSend (color: "RED", notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) ")
 }
 
