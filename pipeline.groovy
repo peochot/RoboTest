@@ -31,7 +31,7 @@
 def notifyStarted() {
   // send to HipChat
   hipchatSend (color: 'YELLOW', notify: true,
-      message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) cause (${env.BUILD_CAUSE}) id (${env.BUILD_ID}) commit (${env.GIT_COMMIT}) branch (${env.BRANCH_NAME}) committer $(git show -s --pretty=%an)"
+      message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) cause (${env.BUILD_CAUSE}) id (${env.BUILD_ID}) commit (${env.GIT_COMMIT}) branch (${env.GIT_BRANCH}) "
     )
 }
 
