@@ -6,7 +6,7 @@
             def build = currentBuild
             currentBuild['status'] = "STARTED"
             currentBuild['color'] = "GREEN"
-            notifyStarted(summarizeBuild(build))
+            notify(build)
           } catch(e) {
             currentBuild['status'] = "FAILED"
             currentBuild['color'] = "RED"
