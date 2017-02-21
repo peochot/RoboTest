@@ -6,9 +6,10 @@
             def build = currentBuild
             currentBuild.result = "STARTED"
             def color = "GREEN"
-            notifySuccessful()
+            notify(build, color)
           } catch(e) {
             currentBuild.result = "FAILED"
+            notify(build, color)
             throw e;
           }
       }
@@ -29,10 +30,10 @@
 
   }
 }
-def notifySuccessful() {
-  hipchatSend (color: 'GREEN', notify: true,
-      message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-    )
+
+def notify(build, color) {
+  hipchatSend (color: color, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.BRANCH_NAME}) \n " 
+                                                      + "Status : ${build.result}  ${summarizeBuild(build)}")
 }
 
 @NonCPS
