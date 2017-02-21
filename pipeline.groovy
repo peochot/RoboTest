@@ -4,6 +4,7 @@
           echo "Building"
           try {
             def build = currentBuild
+            throw new Exception("weeee")
             notifyStarted(summarizeBuild(build))
           } catch(e) {
             notifyFailed()
