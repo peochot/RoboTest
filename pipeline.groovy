@@ -42,7 +42,7 @@
 def notify(build, color) {
   hipchatSend (color: color, notify: true,
       message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
-                + "Status : ${build.status} ${summarizeBuild(build)}"
+                + "Status : ${build.result} ${summarizeBuild(build)}"
     )
 }
 
