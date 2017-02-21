@@ -2,21 +2,23 @@
   node {
       stage("Build") {
           echo "Building"
+          def build = currentBuild
           try {
-            def build = currentBuild
             currentBuild['status'] = "STARTED"
             currentBuild['color'] = "GREEN"
             notify(build)
           } catch(e) {
             currentBuild['status'] = "FAILED"
             currentBuild['color'] = "RED"
-            notify(build)
+            notify(currentBuild)
             throw e;
           }
       }
+
       stage("Unit Test") {
           echo "Unit testing"
       }
+
       branch(/^master$/){
           stage("Pushing to stage") {
               echo "Push"
