@@ -4,7 +4,7 @@
           echo "Building"
           try {
             def build = currentBuild
-            notifyStarted(summarizeBuild(${build}))
+            notifyStarted(summarizeBuild(build))
           } catch(e) {
             notifyFailed()
           }
