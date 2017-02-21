@@ -4,13 +4,12 @@
           echo "Building"
           def build = currentBuild
           try {
-            currentBuild['status'] = "STARTED"
-            currentBuild['color'] = "GREEN"
-            notify(build)
+            currentBuild.result = "STARTED"
+            def color = "GREEN"
+            notify(build, color)
           } catch(e) {
-            currentBuild['status'] = "FAILED"
-            currentBuild['color'] = "RED"
-            notify(currentBuild)
+            currentBuild.result = "FAILED"
+            notify(build, color)
             throw e;
           }
       }
@@ -40,8 +39,8 @@
   }
 }
 
-def notify(build) {
-  hipchatSend (color: build.color, notify: true,
+def notify(build, color) {
+  hipchatSend (color: color, notify: true,
       message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
                 + "Status : ${build.status} ${summarizeBuild(build)}"
     )
