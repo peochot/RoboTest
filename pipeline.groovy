@@ -2,11 +2,16 @@
   node {
       stage("Build") {
           echo "Building"
-          def build = currentBuild
-          currentBuild.result = "STARTED"
-          def color = "GREEN"
-          notify(build, color)
-          
+          try {
+            def build = currentBuild
+            currentBuild.result = "STARTED"
+            def color = "GREEN"
+            notify(build, color)
+          } catch(e) {
+            currentBuild.result = "FAILED"
+            notify(build, color)
+            throw e;
+          }
       }
 
       stage("Unit Test") {
@@ -23,14 +28,6 @@
       }
 
 
-      branch(/^stage$/){
-          stage("Acceptance Test") {
-              echo "Testing"
-          }
-          stage("Deploy") {
-              echo "Deploying"
-          }
-      }
   }
 }
 
