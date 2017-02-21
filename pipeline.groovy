@@ -2,8 +2,8 @@
   node {
       stage("Build") {
           echo "Building"
-          def build = currentBuild
           try {
+            def build = currentBuild
             currentBuild.result = "STARTED"
             def color = "GREEN"
             notify(build, color)
@@ -41,7 +41,7 @@
 
 def notify(build, color) {
   hipchatSend (color: color, notify: true,
-      message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
+      message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
                 + "Status : ${build.result} ${summarizeBuild(build)}"
     )
 }
