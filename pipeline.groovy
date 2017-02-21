@@ -29,13 +29,16 @@
 
   }
 }
-
 def notifySuccessful() {
   hipchatSend (color: 'GREEN', notify: true,
-      message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) "
+      message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) Status : ${build.result}"
     )
 }
-
+@NonCPS
+def notify(build, color) {
+  hipchatSend (color: color, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.BRANCH_NAME}) \n "
+                                                      + "Status : ${build.result}")
+}
 
 @NonCPS
 def summarizeBuild(b) {
