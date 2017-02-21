@@ -4,11 +4,11 @@
           echo "Building"
           try {
             def build = currentBuild
-            currentBuild.status = "STARTED"
+            currentBuild.result = "STARTED"
             currentBuild.color = "GREEN"
             notifyStarted(summarizeBuild(build))
           } catch(e) {
-            currentBuild.status = "FAILED"
+            currentBuild.result = "FAILED"
             currentBuild.color = "RED"
             notify(build)
             throw e;
@@ -38,7 +38,6 @@
   }
 }
 
-@NonCPS
 def notify(build) {
   hipchatSend (color: build.color, notify: true,
       message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
