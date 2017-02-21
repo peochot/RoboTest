@@ -4,12 +4,12 @@
           echo "Building"
           try {
             def build = currentBuild
-            currentBuild.result = "STARTED"
-            currentBuild.color = "GREEN"
+            currentBuild['status'] = "STARTED"
+            currentBuild['color'] = "GREEN"
             notifyStarted(summarizeBuild(build))
           } catch(e) {
-            currentBuild.result = "FAILED"
-            currentBuild.color = "RED"
+            currentBuild['status'] = "FAILED"
+            currentBuild['color'] = "RED"
             notify(build)
             throw e;
           }
