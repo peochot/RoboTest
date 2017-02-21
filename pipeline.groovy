@@ -7,21 +7,6 @@
           def color = "GREEN"
           notify(build, color)
       }
-
-      stage("Unit Test") {
-          echo "Unit testing"
-      }
-
-      branch(/^master$/){
-          stage("Pushing to stage") {
-              echo "Push"
-          }
-          stage("Trigger stage job") {
-              echo "Deploying"
-          }
-      }
-
-
   }
 }
 
