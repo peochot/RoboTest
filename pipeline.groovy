@@ -6,7 +6,7 @@
             def build = currentBuild
             currentBuild.result = "STARTED"
             def color = "GREEN"
-            notifySuccessful(build)
+            notifySuccessful()
           } catch(e) {
             currentBuild.result = "FAILED"
             throw e;
