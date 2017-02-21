@@ -2,16 +2,11 @@
   node {
       stage("Build") {
           echo "Building"
-          try {
-            def build = currentBuild
-            currentBuild.result = "STARTED"
-            def color = "GREEN"
-            notify(build, color)
-          } catch(e) {
-            currentBuild.result = "FAILED"
-            notify(build, color)
-            throw e;
-          }
+          def build = currentBuild
+          currentBuild.result = "STARTED"
+          def color = "GREEN"
+          notify(build, color)
+          
       }
 
       stage("Unit Test") {
