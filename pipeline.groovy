@@ -3,12 +3,11 @@
       stage("Build") {
           echo "Building"
           try {
-            def build = currentBuild
-            build.result = "STARTED"
+            currentBuild.result = "STARTED"
             def color = "GREEN"
-            notify()
+            notifyHipchat()
           } catch(e) {
-            build.result = "FAILED"
+            currentBuild.result = "FAILED"
             notifyHipchat()
             throw e;
           }
