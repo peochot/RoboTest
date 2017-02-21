@@ -2,16 +2,10 @@
   node {
       stage("Build") {
           echo "Building"
-          try {
-            def build = currentBuild
-            currentBuild.result = "STARTED"
-            def color = "GREEN"
-            notify(build, color)
-          } catch(e) {
-            currentBuild.result = "FAILED"
-            notify(build, color)
-            throw e;
-          }
+          def build = currentBuild
+          currentBuild.result = "STARTED"
+          def color = "GREEN"
+          notify(build, color)
       }
 
       stage("Unit Test") {
@@ -36,6 +30,7 @@ def notify(build, color) {
                                                       + "Status : ${build.result}  ${summarizeBuild(build)}")
 }
 
+@NonCPS
 def summarizeBuild(b) {
   b.changeSets.collect { cs ->
     /kind=${cs.kind}; entries=/ + cs.collect { entry ->
