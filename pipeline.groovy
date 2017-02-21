@@ -35,7 +35,7 @@ def notifySuccessful() {
     )
 }
 @NonCPS
-def notify(build, color) {
+def notifyHipchat(build, color) {
   hipchatSend (color: color, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.BRANCH_NAME}) \n "
                                                       + "Status : ${build.result}")
 }
