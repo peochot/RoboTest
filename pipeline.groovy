@@ -6,7 +6,6 @@
             def build = currentBuild
             currentBuild.status = "STARTED"
             currentBuild.color = "GREEN"
-            throw new Exception("weeee")
             notifyStarted(summarizeBuild(build))
           } catch(e) {
             currentBuild.status = "FAILED"
@@ -39,8 +38,8 @@
   }
 }
 
+@NonCPS
 def notify(build) {
-  // send to HipChat
   hipchatSend (color: build.color, notify: true,
       message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
                 + "Status : ${build.status} ${summarizeBuild(build)}"
