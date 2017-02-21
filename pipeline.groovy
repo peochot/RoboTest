@@ -32,13 +32,10 @@
 }
 
 def notify(build, color) {
-  hipchatSend (color: color, notify: true,
-      message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
-                + "Status : ${build.result}  ${summarizeBuild(build)}"
-    )
+  hipchatSend (color: color, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.GIT_BRANCH}) \n "
+                                                      + "Status : ${build.result}  ${summarizeBuild(build)}")
 }
 
-@NonCPS
 def summarizeBuild(b) {
   b.changeSets.collect { cs ->
     /kind=${cs.kind}; entries=/ + cs.collect { entry ->
