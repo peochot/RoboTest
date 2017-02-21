@@ -2,7 +2,12 @@
   node {
       stage("Build") {
           echo "Building"
-          notifyStarted()
+          try {
+            def build = currentBuild
+            notifyStarted(summarizeBuild(${build}))
+          } catch(e) {
+            notifyFailed()
+          }
       }
       stage("Unit Test") {
           echo "Unit testing"
@@ -28,13 +33,17 @@
   }
 }
 
-def notifyStarted() {
+def notifyStarted(message) {
   // send to HipChat
   hipchatSend (color: 'YELLOW', notify: true,
-      message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) cause (${env.BUILD_CAUSE}) id (${env.BUILD_ID}) commit (${env.GIT_COMMIT}) branch (${env.GIT_BRANCH}) "
+      message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) cause (${env.BUILD_CAUSE}) id (${env.BUILD_ID}) commit (${env.GIT_COMMIT}) branch (${env.GIT_BRANCH}) $message"
     )
 }
-
+def notifyFailed() {
+  hipchatSend (color: 'RED', notify: true,
+      message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+    )
+}
 @NonCPS
 def summarizeBuild(b) {
   b.changeSets.collect { cs ->
