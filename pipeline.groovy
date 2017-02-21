@@ -26,8 +26,7 @@
 }
 
 def notify(def build,def color) {
-  hipchatSend (color: color, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) branch (${env.BRANCH_NAME}) \n "
-                                                      + "Status : ${build.result}  ${summarizeBuild(build)}")
+  hipchatSend (color: color, notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
 @NonCPS
