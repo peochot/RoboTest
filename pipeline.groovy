@@ -2,11 +2,16 @@
   node {
       stage("Build") {
           echo "Building"
-          def build = currentBuild
-          currentBuild.result = "STARTED"
-          def color = "GREEN"
-          notifyHipchat()
-
+          try {
+            def build = currentBuild
+            currentBuild.result = "STARTED"
+            def color = "GREEN"
+            notifySuccessful()
+          } catch(e) {
+            currentBuild.result = "FAILED"
+            notifySuccessful()
+            throw e;
+          }
       }
 
       stage("Unit Test") {
@@ -28,6 +33,12 @@
 
 def notifyHipchat() {
   hipchatSend (color: "RED", notify: true, message: "Job: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) ")
+}
+
+def notifySuccessful() {
+  hipchatSend (color: 'GREEN', notify: true,
+      message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+    )
 }
 
 @NonCPS
